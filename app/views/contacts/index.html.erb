@@ -1,0 +1,46 @@
+<%= javascript_include_tag 'views/contacts/index' %>
+<h2>
+	Lista de Contatos
+	<em class="heading_description">Fichas de Perfil de Cliente</em>
+</h2>
+<p>
+	Selecione o cliente clicando no seu nome para alterar e adicionar mais detalhes, obtenha mais informações sobre <b>Como adicionar e gerenciar clientes</b> acessando a <a href="#">Central de Ajuda</a>.</b>
+</p>
+
+<%= form_tag contacts_path, :method => "get", :id => "contacts_search" do %>	
+<div class="horizontal_list_selection">
+	<%= hidden_field_tag :list, params[:list] %>
+	<a href="/contacts" class="select_button left_selector <%= 'current_view' unless params[:list] %>">Ativos</a>
+	<a href="/contacts?list=last" class="select_button center_selector <%= 'current_view' if params[:list] == 'last' %>">&Uacute;ltimos</a>
+	<!--	
+	<a href="/contacts?list=best" class="select_button center_selector <%= 'current_view' if params[:list] == 'best' %>">Melhores</a>		
+	-->
+	<a href="/contacts?list=all" class="select_button right_selector <%= 'current_view' if params[:list] == 'all' %>">Todos</a>		
+	
+	<div class="search">
+		<div class="search_wrapper">
+			<div class="search_icon"><img src="/images/basic/loupe.png" alt="Loupe"></div>			
+			<%= text_field_tag :search, params[:search], :class =>  "search_field thin", :autocomplete => "off" %>
+		</div>
+		<div id="loading" class="hide" style="display: none;"><img src="/images/basic/loader.png?1302297477" alt="Loader"></div>
+		<div class="clear"></div>
+		
+		<!--
+		<a id="advanced_search" href="#">
+			<div class="advanced_search_icon"></div>
+			<span>Pesquisa avançada</span>
+		</a>
+		-->
+	</div>
+	<div class="clear"></div>
+	
+</div>
+<% end %>
+
+
+<div id="contacts">
+	<%= render :partial => 'contacts' %>
+</div>
+
+<br />
+<br />

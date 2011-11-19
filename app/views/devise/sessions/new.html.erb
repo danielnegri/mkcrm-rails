@@ -1,0 +1,26 @@
+<h2>Entre no CRM - Mary Kay</h2>
+
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  
+  <p><%= f.label :email, "E-mail" %><br />
+  <%= f.text_field :email, :autofocus => true %></p>
+
+  <p><%= f.label :password, "Senha" %><br />
+  <%= f.password_field :password %></p>
+
+  <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+  <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+  <%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+
+  <% if devise_mapping.rememberable? -%>
+    <p><%= f.check_box :remember_me %> <%= f.label :remember_me, "Me mantenha conectado" %></p>
+  <% end -%>
+
+
+
+  <p><%= f.submit "Entrar" %></p>
+	
+
+<% end %>
+
+<%= render :partial => "devise/shared/links" %>

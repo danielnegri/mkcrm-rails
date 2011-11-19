@@ -1,0 +1,45 @@
+<h2>
+	Lista de Pedidos
+	<em class="heading_description">Lista dos pedidos de compra e venda</em>
+</h2>
+<p>
+	Para criar um <b>pedido de venda</b> utilize o link <%= link_to 'Adicionar pedido', new_order_path, :type => 'out' %>, para
+	<b>comprar produtos</b> e repor o estoque utilize o link <%= link_to 'Comprar produtos', new_order_path(:type => 'in') %>.
+</p>
+
+<%= form_tag orders_path, :method => "get", :id => "orders_search" do %>	
+<div class="horizontal_list_selection">	
+	<a id="" href="/orders" class="select_button left_selector <%= 'current_view' unless params[:list]  %>">Todos</a>
+	<a href="/orders?list=last" class="select_button center_selector <%= 'current_view' if params[:list] == 'last' %>">&Uacute;ltimos</a>	
+	<a href="/orders?list=due" class="select_button right_selector <%= 'current_view' if params[:list] == 'due' %>">Atrasados</a>			
+	<div class="search">
+		<div class="search_wrapper">
+			<div class="search_icon"><img src="/images/basic/loupe.png" alt="Loupe"></div>		
+			<% 	params[:called_at] ||= localize(@reference, :format => t("date.formats.default")) %>
+			<%= text_field_tag :search, params[:search], :class =>  "search_field thin", :autocomplete => "off", :style => "width: 10em;" %>
+			<%= text_field_tag :called_at, params[:called_at], :class =>  "search_field thin datepicker", :autocomplete => "off", :size => 9, :style => "width: 82px; margin-left: 4px; border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-style: solid solid solid solid; border-width: 1px 1px 1px 1px;" %>			
+			<script>
+				$(function() {
+					$( "#called_at" ).datepicker({
+						dateFormat: 'dd/mm/yy',
+						defaultDate: "+1w",
+						changeMonth: true,
+						changeYear: false
+					})
+				});	
+			</script>
+		</div>
+		<div id="loading" class="hide" style="display: none;"><img src="/images/basic/loader.png?1302297477" alt="Loader"></div>
+		<div class="clear"></div>	
+	</div>
+	<div class="clear"></div>
+	
+</div>
+<% end %>
+
+<div id="orders">
+	
+</div>
+
+<br />
+<br />

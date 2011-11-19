@@ -1,0 +1,131 @@
+<% if @contact_call.errors.any? %>
+<div id="error_explanation">	
+	<ul>
+		<% @contact_call.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<div class="clear"></div>
+
+<%= form_for([@contact, @contact_call]) do |f| %>
+	<div class="editor_area">
+		<div id="contact_call_editor_label" class="editor_label">
+			<div class="alignleft">Informa&ccedil;&otilde;es sobre a Liga&ccedil;&atilde;o</div>
+		</div>	
+	
+		<table id="contact_call_editor_table" class="editor_table" style="display: ">
+			<tbody>				
+				<tr>
+					<td class="label">Assunto</td>
+					<td><%= f.text_field :topic, :size => 30, :autofocus => true %></td>
+				</tr>				
+				<tr>
+					<td class="label">Dura&ccedil;&atilde;o</td>
+					<td>									
+						<span>								
+							<%= f.text_field :called_at, 
+								:value => ( @contact_call.called_at ? localize(@contact_call.called_at, :format => '%d/%m/%Y') : '' ),
+								:class => 'datepicker', :size => 9, :autocomplete => false %> 
+							<%= f.time_select :called_at, :minute_step => 10 %>
+							
+							durante <%= f.text_field :duraction, :size => 10, :style => "width: 20px;" %> 	minutos
+						</span>						
+						<script>
+							$(function() {
+								$( ".datepicker" ).datepicker({
+									dateFormat: 'dd/mm/yy',
+									defaultDate: "+1w",
+									changeMonth: true,
+									changeYear: false,				
+									onKeyUp: function() {
+										this.value = this.value.replace(/[^0-9\/]/g,''); 	
+									},
+									onSelect: function( selectedDate ) {
+										var instance = $( this ).data( "datepicker" ),
+										date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings );
+
+										$("#" + this.id + "_1i").val(date.getFullYear());
+										$("#" + this.id + "_2i").val(date.getMonth()+1);
+										$("#" + this.id + "_3i").val(date.getDate());
+									}
+								})
+							});	
+							
+							var updateFields = function() {
+								var selectedDate = $( "#contact_call_called_at" ).val();
+								var instance = $( "#contact_call_called_at" ).data( "datepicker" ),
+									date = $.datepicker.parseDate(
+										instance.settings.dateFormat ||
+										$.datepicker._defaults.dateFormat,
+										selectedDate, instance.settings );
+
+								$("#contact_call_called_at" + "_1i").val(date.getFullYear());
+								$("#contact_call_called_at" + "_2i").val(date.getMonth()+1);
+								$("#contact_call_called_at" + "_3i").val(date.getDate());
+							};
+							
+							$('.datepicker').change( updateFields );
+							$('form').submit( updateFields );
+							
+						</script>					
+													
+					</td>
+				</tr>
+				<tr>
+					<td class="label">Avalia&ccedil;&atilde;o</td>
+					<td>
+						<%= f.radio_button :evaluation, 'good' %>
+						<%= f.label :evaluation_good, 'Muito Boa' %>
+						<span class="checkbox_span"><small>Sua conversa foi muito boa e o cliente se mostrou bastante disposto.</small></span>				
+					</td>
+				</tr>	
+				<tr>
+					<td class="label"></td>
+					<td>
+						<%= f.radio_button :evaluation, 'neutral' %>
+						<%= f.label :evaluation_neutral, 'Neutro' %>
+						<span class="checkbox_span"><small>Sua conversa n&atilde;o foi muito boa por&eacute;m atingiu o objetivo esperado.</small></span>				
+					</td>
+				</tr>
+				<tr>
+					<td class="label"></td>
+					<td>
+						<%= f.radio_button :evaluation, 'bad' %>
+						<%= f.label :evaluation_bad, 'Ruim' %>
+						<span class="checkbox_span"><small>Sua conversa foi ruim e poderia ter sido melhor.</small></span>				
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="label">Descri&ccedil;&atilde;o</td>
+					<td>
+						<%= f.text_area :description, :cols => 45, :rows => 2 %>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td></td>
+					<td>
+						<div class="buttons_left">													
+							<input type="submit" value="Salvar" name="commit" 	id="contact_call_submit" class="inputsubmit">
+							<% if @contact_call.persisted? %>
+							<%= link_to 'Remover', @contact_call, 
+								:confirm => 'Você tem certeza que deseja remover esta ligação?', :method => :delete, 
+								:class => "button_danger",
+								:style => "padding: 9px 12px 7px 12px;" %>
+							<% end %>
+						</div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+		<!-- end table -->	
+	
+		<div class="clear"></div>		
+	</div>	
+<% end %>
+

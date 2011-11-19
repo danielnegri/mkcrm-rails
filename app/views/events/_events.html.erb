@@ -1,0 +1,91 @@
+<div class="paginate">
+	<div class="left">
+		<% if @events %>
+		<span><strong><%= @events.size %></strong> evento(s) encontrado(s).</span>
+		<% end %>		
+	</div>
+	<div class="right"></div>
+	<div class="clear"></div>
+</div>
+
+<form>	
+	<% reference = nil %>	
+	
+	<table class="grid no_hand">
+		<tbody>
+		<% if @events.size > 0 %>
+			<% @events.each do |event| %>
+			<% day_name = l(event.start_at, :format => "%A") %>
+			<% day_name = 'Hoje' if Time.zone.now.day == event.start_at.day && Time.zone.now.month == event.start_at.month && Time.zone.now.day == event.start_at.day  %>
+			
+			<% if reference != day_name %>
+			<tr>		
+				<td >					
+					<h3>
+						<%= reference = day_name %>
+					</h3>			
+				</td>							
+			</tr>			
+			<% end %>			
+			<tr>	
+				<td style="padding: 1em 0 1em 1em;">					
+					<div style="display: block; border-style: solid;">
+						<a style="margin-right: 10px; float: left;">
+							<img src="/images/basic/calendar_32.png" style="display: block;">
+						</a>
+						
+						<div style="text-align: right; margin-top: 14px; padding-left: 12px; float: right;">
+							<!-- TODO: Cancelar e Finalizar Eventos -->
+							<% if current_user.super_user %>
+							<% if not event.canceled_at %>
+							<a href="<%= cancel_event_path(event) %>" class="button_alert" style="">
+								<span>Cancelar</span>
+							</a>					
+							<% end %>
+							<% if not event.confirmed_at %>
+							<a href="<%= confirm_event_path(event) %>" class="button_info" style="">
+								<span>Finalizar</span>
+							</a>
+							<% end %>					
+							<% end %>		
+						</div>
+						
+						<div style="height: 32px; vertical-align: middle; display: table-cell; width: 10000px;">
+							<span style="color: #333333;">
+								<%= link_to event.title, edit_event_path(event) %>
+							</span>
+							<div style="color: #808080; font-size: 11px;">								
+								<%= l(event.start_at, :format => :long).strip() %>								
+							</div>
+							<div style="color: #808080; font-size: 11px;">
+								<%= simple_format(event.description) %>
+							</div>							
+					  </div>
+					</div>			
+				</td>														
+			</tr>
+			<% end %>
+		<% else %>
+			<tr>
+				<td style="padding: 1em 0 1em 1em; width: 603px;"> 
+					<div style="display: block;">Nenhum resultado encontrado para a sua consulta.</div>
+				</td>					
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
+</form>
+
+<div class="paginate bottom">
+	<div class="left">
+		<a class="back_to_top" href="#content">
+			<div class="to_top_icon"></div>
+			<strong>voltar ao topo</strong>
+			<div class="clear"></div>
+		</a>
+	</div>
+	<div class="right">
+		<%= will_paginate(@events, :previous_label => "&#171; #{t('actions.previous')}", :next_label => "#{t('actions.next')} &#187;") %>
+	</div>
+	<div class="clear"></div>
+</div>

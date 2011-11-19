@@ -1,0 +1,30 @@
+<a href="/product_inventories">
+	<div class="first navigation_button">
+		<img src="/images/basic/box_content_32.png">
+		<h2>Estoque</h2>
+		<p>Controle de produtos no estoque</p>
+	</div>
+</a>
+<a href="/product_inventories/new">
+	<div class="navigation_button <%= 'selected' if current_page?(:controller => 'product_inventories', :action => 'new') %>">
+		<img src="/images/basic/plus_32.png">
+		<h2>Adicionar</h2>
+		<p>Criar novo item de estoque</p>
+	</div>
+</a>
+<% if current_user.super_user %>
+<a href="/products/new">
+	<div class="navigation_button <%= 'selected' if current_page?(:controller => 'products', :action => 'new') %>">
+		<img src="/images/basic/settings_32.png">
+		<h2>Adicionar</h2>
+		<p>Criar novo produto</p>
+	</div>
+</a>
+<% end %>
+<a href="/products">
+	<div class="last navigation_button <%= 'selected' if current_page?(:controller => 'products', :action => 'index') %>">
+		<img src="/images/basic/cosmetics_32.png">
+		<h2>Produtos</h2>
+		<p>Lista de produtos</p>
+	</div>
+</a>

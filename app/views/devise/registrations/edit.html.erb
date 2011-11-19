@@ -1,0 +1,76 @@
+<h2>Editar meu usu&aacute;rio
+	<em class="heading_description">Alterar a senha de entrada</em>
+</h2>
+
+<%= devise_error_messages! %>
+
+<div class="clear"></div>
+
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+	<div class="editor_area">
+		<div id="event_editor_label" class="editor_label">
+			<div class="alignleft">Informa&ccedil;&otilde;es da minha conta</div>			
+		</div>
+		
+		<table id="event_editor_table" class="editor_table" style="display: ">
+			<tbody>				
+				<tr>
+					<td class="label">E-Mail</td>
+					<td><%= f.text_field :email, :size => 30 %></td>
+				</tr>
+				<tr>
+					<td class="label">Senha atual</td>
+					<td>
+						<%= f.password_field :current_password, :size => 30 %>
+						<span class="checkbox_span">
+							<small>
+								<i>N&oacute;s precisamos da sua senha atual para confirmar as altera&ccedil;&otilde;es.</i>
+							</small>
+						</span>					
+					</td>
+				</tr>
+				<tr>
+					<td class="label">Nova Senha</td>
+					<td>
+						<%= f.password_field :password, :size => 30 %>
+						<span class="checkbox_span">
+							<small>
+								<i>Deixe em branco se voc&ecirc; n&atilde;o quer alter&aacute;-la.</i>
+							</small>
+						</span>
+					</td>
+				</tr>				
+				<tr>
+					<td class="label">Redigite sua nova senha</td>
+					<td>
+						<%= f.password_field :password_confirmation, :size => 30 %>
+					</td>
+				</tr>
+															
+			</tbody>
+			<tfoot>
+				<tr>
+					<td></td>
+					<td>
+						<div class="buttons_left">													
+							<%= f.submit "Salvar" %>						
+						</div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+		<!-- end table -->
+		
+		<div class="clear"></div>
+			
+	</div>
+<% end %>
+<br /><br />
+<h2>Excluir meu usu&aacute;rio
+	<em class="heading_description">Remover minha conta e todos meus dados</em>
+</h2>
+
+
+<p>N&atilde;o gostei! <%= link_to "Quero cancelar minha conta", registration_path(resource_name), :confirm => "Você tem certeza que deseja cancelar sua conta?", :method => :delete %>.</p>
+

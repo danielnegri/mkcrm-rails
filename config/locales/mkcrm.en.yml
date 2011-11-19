@@ -1,0 +1,161 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:   
+    activerecord:
+        models:
+                contact: Contact
+                inbox_message: "Inbox Message"
+                message: Message
+                notification: Notification
+                order: Order
+                order_item: "Order Item"
+                payment: Payment
+                product: Product
+                profile: Profile
+        attributes:             
+            contact:            
+                name: Name
+                email: Email
+                notes: Notes
+                telephone: Telephone
+                mobile_phone: "Mobile phone"
+                address: Address
+                latitude: Latitude
+                longitude: Longitude
+                deleted_at: "Deleted at"
+                last_order_id: "Last Order ID"
+                
+            inbox_message:
+                message: Message
+                user: User
+                is_private: "Private Message"
+                deleted_at: "Deleted at"
+            
+            message:
+                user: User
+                type: Type
+                title: Title
+                content: Content
+                deleted_at: "Deleted at"
+                
+            notification:
+                user: User
+                type: Type
+                description: Description
+                deleted_at: "Deleted at"     
+                
+            order:
+                user: User
+                contact: Contact
+                type: Type
+                notes: Notes
+                status: Status
+                completed_at: "Completed at"
+                deleted_at: "Deleted at"
+                
+            order_item:
+                order: Order
+                product: Product
+                price: Price
+                quantity: Quantity
+                status: Status
+                shipped_at: "Shipped at"
+                
+            payment:
+                order: Order
+                method: Method
+                amount: Amount
+                expected_at: "Expected at"
+                confirmation_at: "Confirmation at" 
+      
+            product:
+                user: User
+                name: Name
+                description: Description
+                sku: "SKU"
+                price: Price
+                deleted_at: "Deleted at"
+            
+            profile:
+                name: Name
+                location: Location
+                biography: Biography
+                telephone: Telephone
+                mobile_phone: "Mobile phone"
+                date_of_birth: "Date of Birth"
+                web: Web
+                code: Code
+                time_zone: "Time Zone"
+                language: Language
+                first_day_of_week: "First day of week"            
+            
+                   
+    contacts: Contacts
+    inbox_messages: "Inbox Messages"
+    messages: Messages
+    notifications: Notifications
+    orders: Orders
+    order_items: "Order Items"
+    payments: Payments
+    products: Products
+    profiles: Profiles   
+        
+    actions:
+        create: Create
+        update: Update    
+        destroy: Delete
+        save: "Save now"
+
+        search: Search
+        list: List
+        listing: Listing        
+        show: Show        
+        back_to: "Back to"
+        next: Next
+        previous: Previous
+        
+        contact:
+            create: "Create Contact"
+            update: "Update Contact"
+            destroy: "Delete Contact"
+            listing: "Listing Contacts"
+        
+        order:
+            create: "Create Order"
+            update: "Update Order"
+            destroy: "Delete Order"
+            listing: "Listing Orders"
+            
+        product:
+            create: "Create Product"
+            update: "Update Product"
+            destroy: "Delete Product"
+            listing: "Listing Products"
+            
+        
+    notice_messages:
+        confirmation: "Are you sure?"    
+        maximum_size_of: "Maximum size of"        
+                
+        contact:
+            created: "Contact created sucessfully."
+            updated: "Contact updated sucessfully."
+            deleted: "Contact deleted sucessfully."
+            not_deleted: "Whoops. Sorry, we can't delete your contact."
+            
+        order:
+            created: "Order created sucessfully."
+            updated: "Order updated sucessfully."
+            deleted: "Order deleted sucessfully."
+            not_deleted: "Whoops. Sorry, we can't delete your order."
+        
+        product:
+            created: "Product created sucessfully."
+            updated: "Product updated sucessfully."
+            deleted: "Product deleted sucessfully."
+            not_deleted: "Whoops. Sorry, we can't delete your product."
+        
+                
+                
+                              

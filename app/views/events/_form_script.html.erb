@@ -1,0 +1,75 @@
+<script>
+	// Event Table
+	$('#hide_event_table').click(function() {
+		$('#event_editor_table').fadeToggle('slow', function() {
+			return false;
+		});	
+	
+		$('#hide_event_table').toggle('slow', function() {
+			$('#show_event_table').toggle('slow', function() {
+				return false;
+			});	 
+		});	
+		
+		$('#event_editor_desc').fadeToggle('slow', function() {
+			return false;
+		});	
+	});
+	
+	
+	
+	$('#show_event_table').click(function() {
+	  	$('#event_editor_table').fadeToggle('slow', function() {
+			return false;
+		});	
+	
+		$('#show_event_table').toggle('slow', function() {
+			$('#hide_event_table').toggle('slow', function() {
+				return false;
+			});	 
+		});
+		
+		$('#event_editor_desc').fadeToggle('slow', function() {
+			return false;
+		});	
+	});
+	
+	// Event Team Table
+	
+	$('#hide_event_team_table').click(function() {
+		$('#event_team_editor_table').fadeToggle('slow', function() {
+			return false;
+		});	
+	
+		$('#hide_event_team_table').toggle('slow', function() {
+			$('#show_event_team_table').toggle('slow', function() {
+				return false;
+			});	 
+		});	
+		
+		$('#event_team_editor_desc').fadeToggle('slow', function() {
+			return false;
+		});	
+	});
+	
+	
+	
+	$('#show_event_team_table').click(function() {
+	  	$('#event_team_editor_table').fadeToggle('slow', function() {
+			return false;
+		});	
+	
+		$('#show_event_team_table').toggle('slow', function() {
+			$('#hide_event_team_table').toggle('slow', function() {
+				return false;
+			});	 
+		});
+		
+		$('#event_team_editor_desc').fadeToggle('slow', function() {
+			return false;
+		});	
+	});
+	
+	
+
+</script>

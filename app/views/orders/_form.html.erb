@@ -1,0 +1,66 @@
+<div class="paginate">
+	<div class="left">
+		<% if @order.order_items %>
+		<span><strong><%= @order.order_items.size %> selecionado(s)</strong></span>
+		<% end %>		
+	</div>
+	<div class="right"></div>
+	<div class="clear"></div>
+</div>
+
+<form method="post">	
+	<table id="order_items" class="grid no_hand">
+		<tbody>
+		<% if @order.order_items.size > 0 %>
+			<% @order.order_items.each do |item| %>
+			<tr>
+				<td style="padding: 1em 0 1em 1em;">					
+					<div style="display: block; border-style: solid;">
+						<div style="margin-right: 10px; float: left;" >	
+							<% logger.info "id: " << item.product.id.to_s %>		
+							<% product = Product.find(item.product.id) %>
+							<%= image_tag product.attachment.url(:micro), :alt => product.name, 
+								:width => 32, :height => 32, :class => "avatar",
+								:styles => "max-height:32px; max-width:32px;" %>
+						</div>					
+						<div class="shortcut" style="text-align: right; margin-top: 4px; padding-left: 12px; float: right;">						
+							<a href="#" class="button_info">
+								<span><strong>-</strong></span>
+							</a>
+						</div>
+						<div style="text-align: right; margin-top: 4px; padding-left: 12px; float: right; font-size: 18px;">						
+							<%= number_to_currency(product.price) %>	
+						</div>
+						<div style="height: 32px; vertical-align: middle; display: table-cell; width: 10000px;">
+							<span style="color: #333333;">
+								<%= "#{item.product.name} - #{item.product.sku}" %>
+							</span>
+							<div style="color: #808080; font-size: 11px;">
+								<%= ( product.description.blank? ? 'sem descrição' : item.product.description ) %>
+							</div>													
+					  </div>
+					</div>			
+				</td>
+			</tr>			
+			<% end %>
+		<% else %>
+			<tr>
+				<td style="padding: 1em 0 1em 1em; width: 603px;"> 
+					<div style="display: block;">Nenhum produto selecionado.</div>
+				</td>					
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
+</form>
+
+<div class="paginate bottom">
+	<div class="left">
+		<a class="back_to_top" href="#">
+			<div class="to_top_icon"></div>
+			<strong>voltar ao topo</strong>
+			<div class="clear"></div>
+		</a>
+	</div>
+	<div class="clear"></div>
+</div>

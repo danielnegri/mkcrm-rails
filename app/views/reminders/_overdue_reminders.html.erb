@@ -1,0 +1,85 @@
+<% if @overdue_reminders.size > 0 %>
+<div class="paginate">
+	<div class="left">
+		<% if @overdue_reminders %>
+		<span><strong><%= @overdue_reminders.size %></strong> lembrete(s) atrasado(s).</span>
+		<% end %>		
+	</div>
+	<div class="right"></div>
+	<div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+
+
+<form>	
+	<% reference = nil %>	
+	
+	<table id="overdue_reminders" class="grid no_hand">
+		<tbody>
+			<% @overdue_reminders.each do |reminder| %>
+			<% day_name = l(reminder.scheduled_at, :format => "%A") %>
+			<% day_name = 'Hoje' if Time.zone.now.day == reminder.scheduled_at.day && Time.zone.now.month == reminder.scheduled_at.month && Time.zone.now.day == reminder.scheduled_at.day  %>
+			
+			<% if reference != day_name %>
+			<tr>		
+				<td>					
+					<h3>
+						<%= reference = day_name %>
+					</h3>			
+				</td>							
+			</tr>			
+			<% end %>			
+			<tr>	
+				<td style="padding: 1em 0 0 1em;">					
+					<div style="display: block; border-style: solid;">
+						<a style="margin-right: 10px; float: left;">
+							<img src="/images/basic/stop_32.png" style="display: block;">
+						</a>						
+						<div style="text-align: right; margin-top: 4px; padding-left: 12px; float: right;">
+							<% unless reminder.confirmed %>
+							<a href="<%= confirm_reminder_path(reminder.id) %>" class="button_info" style="">
+								<span>Confirmar</span>
+							</a>
+							<% end %>
+							
+							<%= link_to 'Remover', reminder, 
+								:confirm => 'Você tem certeza que deseja remover este lembrete?', :method => :delete, 
+								:class => "button_danger"%>							
+						</div>
+						
+						<div style="height: 32px; vertical-align: middle; display: table-cell; width: 10000px;">
+							<span style="color: #333333;">
+								<%= link_to reminder.title, edit_reminder_path(reminder), :style => "color: red;" %> (Atrasado)								
+							</span>
+							<div style="color: #808080; font-size: 11px;">								
+								<%= l(reminder.scheduled_at, :format => :long).strip() %>								
+							</div>
+							<div style="color: #808080; font-size: 11px;">
+								<%= simple_format(reminder.description) %>
+							</div>							
+					  </div>
+					</div>			
+				</td>														
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</form>
+
+<div class="paginate bottom">
+	<div class="left">
+		<a class="back_to_top" href="#content">
+			<div class="to_top_icon"></div>
+			<strong>voltar ao topo</strong>
+			<div class="clear"></div>
+		</a>
+	</div>
+	<div class="right">
+		<%= will_paginate(@reminders, :previous_label => "&#171; #{t('actions.previous')}", :next_label => "#{t('actions.next')} &#187;") %>
+	</div>
+	<div class="clear"></div>
+</div>
+<br />
+<br />
+<% end %>

@@ -1,0 +1,107 @@
+<% if @reminder.errors.any? %>
+<div id="error_explanation">	
+	<ul>
+		<% @reminder.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<div class="clear"></div>
+
+<%= form_for(@reminder) do |f| %>
+	<div class="editor_area">
+		<div id="reminder_editor_label" class="editor_label">
+			<div class="alignleft">Informa&ccedil;&otilde;es sobre o Lembrete</div>
+		</div>	
+	
+		<table id="reminder_editor_table" class="editor_table" style="display: ">
+			<tbody>				
+				<tr>
+					<td class="label">T&iacute;tulo</td>
+					<td><%= f.text_field :title, :size => 30, :autofocus => true %></td>
+				</tr>	
+				<tr>
+					<td class="label">Agendar para</td>
+					<td>					
+						<span>								
+							<%= f.text_field :scheduled_at, 
+								:value => ( @reminder.scheduled_at ? localize(@reminder.scheduled_at, :format => '%d/%m/%Y') : '' ),
+								:class => 'datepicker', :size => 9, :autocomplete => false %> 
+							<%= f.time_select :scheduled_at, :minute_step => 10 %>
+						</span>						
+						<script>
+							$(function() {
+								$( ".datepicker" ).datepicker({
+									dateFormat: 'dd/mm/yy',
+									defaultDate: "+1w",
+									changeMonth: true,
+									changeYear: false,				
+									onKeyUp: function() {
+										this.value = this.value.replace(/[^0-9\/]/g,''); 	
+									},
+									onSelect: function( selectedDate ) {
+										var instance = $( this ).data( "datepicker" ),
+										date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings );
+
+										$("#" + this.id + "_1i").val(date.getFullYear());
+										$("#" + this.id + "_2i").val(date.getMonth()+1);
+										$("#" + this.id + "_3i").val(date.getDate());
+									}
+								})
+							});	
+							
+							var updateFields = function() {
+								var selectedDate = $( "#reminder_scheduled_at" ).val();
+								var instance = $( "#reminder_scheduled_at" ).data( "datepicker" ),
+									date = $.datepicker.parseDate(
+										instance.settings.dateFormat ||
+										$.datepicker._defaults.dateFormat,
+										selectedDate, instance.settings );
+
+								$("#reminder_scheduled_at" + "_1i").val(date.getFullYear());
+								$("#reminder_scheduled_at" + "_2i").val(date.getMonth()+1);
+								$("#reminder_scheduled_at" + "_3i").val(date.getDate());
+							};
+							
+							$('.datepicker').change( updateFields );
+							$('form').submit( updateFields );
+							
+						</script>
+					</td>
+				</tr>							
+				<tr>
+					<td class="label">Descri&ccedil;&atilde;o</td>
+					<td><%= f.text_area :description, :cols => 45, :rows => 2 %></td>
+				</tr>							
+				<tr>
+					<td></td>
+					<td>
+						<%= f.check_box :confirmed %>
+						<%= f.label :confirmed, 'Finalizado' %>
+					</td>
+				</tr>				
+			</tbody>
+			<tfoot>
+				<tr>
+					<td></td>
+					<td>
+						<div class="buttons_left">													
+							<input type="submit" value="Salvar" name="commit" class="inputsubmit">
+							<% if @reminder.persisted? %>
+							<%= link_to 'Remover', @reminder, 
+								:confirm => 'Você tem certeza que deseja remover este lembrete?', :method => :delete, 
+								:class => "button_danger",
+								:style => "padding: 9px 12px 7px 12px;" %>
+							<% end %>
+						</div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+		<!-- end table -->
+	
+		<div class="clear"></div>		
+	</div>	
+<% end %>

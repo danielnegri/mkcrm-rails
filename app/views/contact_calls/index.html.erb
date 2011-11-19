@@ -1,0 +1,43 @@
+<%= javascript_include_tag 'views/contact_calls/index' %>
+<h2>
+	Lista de Ligações
+	<em class="heading_description">Ligações feitas para clientes</em>
+</h2>
+<p>
+	Para criar uma nova ligação basta selecionar um contato em <a href="<%= contacts_path %>">.</b>
+</p>
+
+<%= form_tag contact_calls_path, :method => "get", :id => "contact_calls_search" do %>	
+<div class="horizontal_list_selection">	
+	<a href="/contact_calls?status=active" class="select_button left_selector current_view">Todas</a>
+	<div class="search">
+		<div class="search_wrapper">
+			<div class="search_icon"><img src="/images/basic/loupe.png" alt="Loupe"></div>		
+			<% 	params[:called_at] ||= localize(@yesterday, :format => t("date.formats.default")) %>
+			<%= text_field_tag :search, params[:search], :class =>  "search_field thin", :autocomplete => "off", :style => "width: 10em;" %>
+			<%= text_field_tag :called_at, params[:called_at], :class =>  "search_field thin datepicker", :autocomplete => "off", :size => 9, :style => "width: 82px; margin-left: 4px; border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-style: solid solid solid solid; border-width: 1px 1px 1px 1px;" %>			
+			<script>
+				$(function() {
+					$( "#called_at" ).datepicker({
+						dateFormat: 'dd/mm/yy',
+						defaultDate: "+1w",
+						changeMonth: true,
+						changeYear: false
+					})
+				});	
+			</script>
+		</div>
+		<div id="loading" class="hide" style="display: none;"><img src="/images/basic/loader.png?1302297477" alt="Loader"></div>
+		<div class="clear"></div>	
+	</div>
+	<div class="clear"></div>
+	
+</div>
+<% end %>
+
+<div id="contact_calls">
+	<%= render :partial => 'contact_calls' %>
+</div>
+
+<br />
+<br />

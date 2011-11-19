@@ -1,0 +1,21 @@
+<a href="/reminders">
+	<div class="first navigation_button <%= 'selected' if current_page?(:controller => 'reminders', :action => 'index') %>">
+		<img src="/images/basic/clock_32.png">
+		<h2>Lembretes</h2>
+		<p>Lista de lembretes</p>
+	</div>
+</a>
+<a href="/reminders/new">
+	<div class="navigation_button <%= 'selected' if current_page?(:controller => 'reminders', :action => 'new') %>">
+		<img src="/images/basic/plus_32.png">
+		<h2>Adicionar</h2>
+		<p>Criar novo lembrete</p>
+	</div>
+</a>
+<a href="#">
+	<div class="last navigation_button">
+		<img src="/images/basic/calendar_32.png">
+		<h2>Eventos</h2>
+		<p>Eventos agendados</p>
+	</div>
+</a>

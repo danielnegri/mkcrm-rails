@@ -1,0 +1,103 @@
+<% if @product_inventory.product %>
+<div class="editor_area">
+	<div id="product_inventory_editor_label" class="editor_label">
+		<div class="alignleft">Produto selecionado</div>			
+	</div>
+	
+	
+	<div style="display: block; border-style: solid; margin: 16px auto 0px">
+		<a style="margin-right: 10px; float: left;">
+			<%= image_tag @product_inventory.product.attachment.url(:product), :alt => @product_inventory.product.name, 
+			:style => "display: block; background-color: #FFFFFF; border: 1px solid #B2B2B2; padding: 2px; max-height:128px; max-width:128px;",
+			:width => 128, :height => 128 %>
+		</a>			
+		<div style="height: 32px; vertical-align: middle; display: table-cell; width: 10000px;">
+			<h3 style="color: #333333; margin-bottom: 4px;">
+				<%= link_to @product_inventory.product.name, @product_inventory.product %>
+			</h3>
+			<span style="color: #808080; margin-top: 14px; margin-bottom: 4px;" >
+				<%= @product_inventory.product.sku %>&nbsp;
+			</span>			
+			<div style="color: #333333; font-size: 32px; margin-top: 44px;">
+				<strong><%= number_to_currency(@product_inventory.product.price) %></strong>&nbsp;
+			</div>	
+			<div style="color: #808080; font-size: 11px; margin-top: 4px; ">
+				<% unless @product_inventory.product.description.blank? %>
+				<%= @product_inventory.product.description %>&nbsp;
+				<% else %>
+				(sem descri&ccedil;&atilde;o)&nbsp;
+				<% end %>
+			</div>	
+	  </div>
+	</div>
+	<div class="clear"></div>
+	<br />
+</div>
+<% end %>
+
+<% if @product_inventory.errors.any? %>
+<div id="error_explanation">	
+	<ul>
+		<% @product_inventory.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<div class="clear"></div>
+
+<%= form_for @product_inventory do |f| %>
+	<div class="editor_area">
+		<div id="product_inventory_editor_label" class="editor_label">
+			<div class="alignleft">Quantidades a pronta-entrega</div>			
+		</div>	
+	
+		<table id="product_inventory_editor_table" class="editor_table" style="">
+			<tbody>	
+				<tr>
+					<td class="label">Produto</td>
+					<td>
+						<%= f.hidden_field :product_id %>
+						<% if @product_inventory.product %>
+						<%= @product_inventory.product.name %>
+						<% else %>
+						<input id="search" value="<%= @product_inventory.product.name if @product_inventory.product %>" type="text" size="30">
+						<% end %>
+					</td>
+				</tr>	
+				<% if @product_inventory.product %>				
+				<tr>
+					<td class="label">Dispon&iacute;vel</td>
+					<td><%= f.text_field :count, :size => 30 %></td>
+				</tr>
+				<tr>
+					<td class="label">M&aacute;ximo desej&aacute;vel</td>
+					<td><%= f.text_field :max, :size => 30 %></td>
+				</tr>
+				<tr>
+					<td class="label">M&iacute;nimo desej&aacute;vel</td>
+					<td><%= f.text_field :min, :size => 30 %></td>
+				</tr>							
+				<% end %>				
+			</tbody>
+			<tfoot>
+				<tr>
+					<td></td>
+					<td>
+						<div class="buttons_left">													
+							<input type="submit" value="Salvar" name="commit" class="inputsubmit">
+						</div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+		<!-- end table -->		
+	
+		<div class="clear"></div>		
+	</div>
+<% end %>
+
+<%= javascript_include_tag "views/product_inventories/form" %>
+
+

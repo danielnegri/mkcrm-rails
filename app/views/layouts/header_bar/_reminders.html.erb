@@ -1,0 +1,75 @@
+<% current_reminders.each do |reminder| %>
+<div class="header_panel_row header_panel_link">
+	<a href="<%= edit_reminder_path(reminder) %>" style="margin: 0 12px; float: left;">
+	<% if reminder.confirmed %>
+		<img src="/images/basic/tick_32.png" style="display: block;">
+	<% else %>
+		<% if reminder.is_due %>
+		<img src="/images/basic/stop_32.png" style="display: block;">
+		<% else %>
+		<img src="/images/basic/clock_32.png" style="display: block;">
+		<% end %>
+	<% end %>
+	</a>						
+	
+	<div style="text-align: right; margin-top: 4px; padding-left: 12px; float: right;">
+		<% unless reminder.confirmed %>
+		<a href="<%= confirm_reminder_path(reminder.id) %>" class="button_info" style="">
+			<span>Confirmar</span>
+		</a>
+		<% end %>							
+	</div>
+	
+	
+	<div style="height: 32px; vertical-align: middle; display: table-cell; width: 10000px;">
+		<span style="color: #333333;">
+			<% unless reminder.is_due %>
+			<%= link_to reminder.title, edit_reminder_path(reminder) %>
+			<% else %>								
+			<%= link_to reminder.title, edit_reminder_path(reminder), :style => "color: red;" %> (atrasado)					
+			<% end %>
+		</span>
+		<div style="color: #808080; font-size: 11px;">								
+			<%= l(reminder.scheduled_at, :format => :default).strip() %>								
+		</div>					
+  </div>
+</div>
+<% end %>
+
+<div class="header_panel_row header_panel_link" 
+	style="border-color: #DDDDDD transparent #FFFFFF;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    padding: 10px 6px 8px;
+    text-align: center;">
+    <span class="header_panel_header"><a href="/reminders">Listar todos</a></span>
+</div>
+	
+
+
+
+
+
+
+
+<!--
+<div class="header_panel_row header_panel_link">
+    <span class="header_panel_header"><a href="#">Lembrete</a></span>
+    for home and home office
+</div>
+
+<div class="header_panel_row header_panel_link">
+    <span class="header_panel_header"><a href="#">Education Store</a></span>
+    for students, educators, and staff
+</div>
+
+<div class="header_panel_row header_panel_link">
+    <span class="header_panel_header"><a href="#">Business Store</a></span>
+    for small and medium businesses
+</div>
+
+<div class="header_panel_row header_panel_link">
+    <span class="header_panel_header"><a href="#">Other ways to buy</a></span>
+</div>
+-->

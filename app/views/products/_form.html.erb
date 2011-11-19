@@ -1,0 +1,71 @@
+<% if @product.errors.any? %>
+<div id="error_explanation">	
+	<ul>
+		<% @product.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<div class="clear"></div>
+
+<%= form_for @product, :html => { :multipart => true }  do |f| %>
+	<div class="editor_area">
+		<div id="product_editor_label" class="editor_label">
+			<div class="alignleft">Informa&ccedil;&otilde;es sobre o Produto</div>			
+		</div>	
+	
+		<table id="product_editor_table" class="editor_table" style="">
+			<tbody>
+				<tr>
+					<td class="label">Imagem</td>
+					<td>
+						<a class="avatar" href="<%= @product.attachment.url(:large) %>" target="_blank">
+							<%= image_tag @product.attachment.url(:thumb), :alt => @product.name,
+								:width => 96, :height => 96,
+								:styles => "max-height:96px; max-width:96px;" %>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="label"></td>
+					<td>												
+						<%= f.file_field :attachment %>
+						<span class="checkbox_span"><small>Tamanho máximo de 2Mb.  JPG, GIF, PNG.</small></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="label">Nome</td>
+					<td><%= f.text_field :name, :size => 30 %></td>
+				</tr>
+				<tr>
+					<td class="label">C&oacute;digo Mary Kay</td>
+					<td><%= f.text_field :sku, :size => 30 %></td>
+				</tr>
+				<tr>
+					<td class="label">Pre&ccedil;o</td>
+					<td><%= f.text_field :price, :size => 30 %></td>
+				</tr>
+				
+				<tr>
+					<td class="label">Descri&ccedil;&atilde;o</td>
+					<td><%= f.text_area :description, :cols => 45, :rows => 2 %></td>
+				</tr>									
+			</tbody>
+			<tfoot>
+				<tr>
+					<td></td>
+					<td>
+						<div class="buttons_left">													
+							<input type="submit" value="Salvar" name="commit" class="inputsubmit">
+						</div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+		<!-- end table -->		
+	
+		<div class="clear"></div>		
+	</div>
+<% end %>

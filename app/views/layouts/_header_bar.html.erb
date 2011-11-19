@@ -1,0 +1,38 @@
+<div id="menu_bar" class="header_bar">	
+	<!--	
+	<a class="header_bar_item header_bar_item_first header_bar_link" href="#">Notícias</a>
+	
+	<a class="header_bar_item header_bar_link" href="#">Mensagens</a>
+	-->
+	
+	
+	<a class="header_bar_item header_bar_link first" href="/">Notícias</a>
+	
+	<a class="header_bar_item header_bar_link" href="/contacts">Clientes</a>					
+	<a class="header_bar_item header_bar_link " href="/events">Eventos</a>											
+	<a class="header_bar_item header_bar_link " href="/orders">Pedidos</a>			
+	<a class="header_bar_item header_bar_link " href="/product_inventories">Produtos</a>															
+	<!--
+	<a class="header_bar_item header_bar_link" href="#">Financeiro</a>
+	-->
+	
+	
+	<div class="header_bar_item">							
+		<a id="reminder_header_bar_icon_link" href="/reminders" style="margin: 12px 6px 0 0; float: left;">	
+			<% if current_reminders.length > 0 %>										
+			<img src="/images/basic/info_16.png" style="display: block; padding: 1px;">
+			<% else %>
+			<img src="/images/basic/info_disabled_16.png" style="display: block; padding: 1px;">
+			<% end %>
+		</a>
+		<a id="reminder_header_bar_link" href="/reminders/" class="header_bar_link">
+			Lembretes
+		</a>
+	
+		<div id="reminders_panel" class="header_drop_panel hidden" >
+            <%= render :partial => "layouts/header_bar/reminders" %>						
+        </div>						
+	</div>	
+	
+	<a class="header_bar_item_last header_bar_link" href="#" onClick="openFeedback();">Sugest&otilde;es</a>				
+</div>

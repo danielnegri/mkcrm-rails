@@ -1,0 +1,40 @@
+<a href="/contacts">
+	<div class="first navigation_button <%= 'selected' if current_page?(:controller => 'contacts', :action => 'index') %>">
+		<img src="/images/basic/user_info_32.png">
+		<h2>Contatos</h2>
+		<p>Lista de contatos</p>
+	</div>
+</a>
+<a href="/contacts/new">
+	<div class="navigation_button <%= 'selected' if current_page?(:controller => 'contacts', :action => 'new') %>">
+		<img src="/images/basic/plus_32.png">
+		<h2>Adicionar</h2>
+		<p>Criar novo contato com formulário completo</p>
+	</div>
+</a>
+
+<!--
+<a href="#">
+	<div class="navigation_button">
+		<img src="/images/basic/right_32.png">
+		<h2>Importar</h2>
+		<p>Crie vários contatos de uma vez só</p>
+	</div>
+</a>
+
+<a href="#">
+	<div class="navigation_button">
+		<img src="/images/basic/delete_32.png">
+		<h2>Excluir vários</h2>
+		<p>Exclua vários contatos de uma vez só</p>
+	</div>
+</a>
+-->
+
+<a href="<%= contact_calls_path %>">
+	<div class="last navigation_button">
+		<img src="/images/basic/telephone_32.png">
+		<h2>Ligações</h2>
+		<p>Lista das ligações realizadas</p>
+	</div>
+</a>

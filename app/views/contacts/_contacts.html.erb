@@ -1,0 +1,72 @@
+<div class="paginate">
+	<div class="left">
+		<% if @contacts %>
+		<span><strong><%= @contacts.size %></strong> cliente(s) encontrado(s).</span>
+		<% end %>
+		<!--
+		<a class="hide small_button delete_contacts" href="#">Excluir selecionados</a>
+		-->
+	</div>
+	<div class="right"></div>
+	<div class="clear"></div>
+</div>
+
+<form method="post">	
+	<table class="grid no_hand">
+	<% if @contacts.size > 0 %>
+		<tbody>
+			<% @contacts.each do |contact| %>
+			<tr>
+				<td style="width:48px; padding: 1em 0 1em 1em;;">
+					<input type="checkbox">
+				</td>					
+				<td style="width:48px; padding: 0.5em 1em" class="table_image">
+					<div style="width:42px; max-width:42px;" class="table_image_wrapper">
+						<a style="display:block;" href="<%= contact_path(contact) %>">							
+							<%= image_tag contact.avatar.url(:micro), :alt => contact.name, 
+								:width => 32, :height => 32, :class => "avatar",
+								:styles => "max-height:32px; max-width:32px;" %>
+						</a>
+					</div>
+				</td>
+				<td style="width:24px;">
+					<a style="display: block;" class="action_on_hover" href="<%= edit_contact_path(contact) %>">
+						<img style="width:24px;" src="/images/basic/pencil_32.png" alt="Pencil_32">
+					</a>
+					<div class="clear"></div>
+				</td>
+				<td style="width:200px;">				
+					<%= link_to contact.name, contact_path(contact), :style => "width: 200px; float:left; font-size: 14px; font-weight: bold;" %>																	
+				</td>
+				<td style="width:120px;">						
+					<%= number_with_delimiter(contact.score) %>																
+				</td>
+				<td style="width:100%; ">
+					<a style="display:block; float:right;" href="<%= contact_path(contact) %>">
+						<%= "#{contact.telephone} #{( contact.telephone != '' && contact.mobile_phone != '' ? '  |  ' : '' )} #{contact.mobile_phone}" %>
+					</a>
+				</td>
+			</tr>
+			<% end %>
+		<% else %>
+			<tr>
+				<td style="padding: 1em 0 1em 1em; width: 603px;"> 
+					<div style="display: block;">Nenhum resultado encontrado para a sua consulta.</div>
+				</td>					
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
+</form>
+
+<div class="paginate bottom">
+	<div class="left">
+		<a class="back_to_top" href="#content">
+			<div class="to_top_icon"></div>
+			<strong>voltar ao topo</strong>
+			<div class="clear"></div>
+		</a>
+	</div>
+	<div class="right"><%= will_paginate(@contacts, :previous_label => "&#171; #{t('actions.previous')}", :next_label => "#{t('actions.next')} &#187;") %></div>
+	<div class="clear"></div>
+</div>

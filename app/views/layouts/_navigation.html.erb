@@ -1,0 +1,27 @@
+<!-- NAVIGATION -->
+<ul id="navigation">							
+	<li>
+		<!-- SEARCH -->
+		<div id="search">
+			<form action="/search" method="get">
+				<input name="query" id="query" title="Search..." class="hintable hint_text" type="text"
+				onblur="if (this.value == '') {this.value = 'Procurar...';}" onfocus="if (this.value == 'Procurar...') {this.value = '';}" value="Procurar...">
+			</form>
+		</div>
+	</li>
+	<li>
+		<%= link_to t('products'), products_url %>
+	</li>
+	<li>
+		<%= link_to t('orders'), orders_url %>
+	</li>				
+	<li>
+		<%= link_to t('contacts'), contacts_url %>
+	</li>
+	<li>
+		<%= link_to 'Eventos', events_url %>
+	</li>	
+	<li>
+		<a href="#">Notícias</a>
+	</li>				
+</ul>

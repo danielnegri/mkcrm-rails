@@ -1,0 +1,94 @@
+<div class="paginate">
+	<div class="left">
+		<% if @reminders %>
+		<span><strong><%= @reminders.size %></strong> lembrete(s) encontrado(s).</span>
+		<% end %>		
+	</div>
+	<div class="right"></div>
+	<div class="clear"></div>
+</div>
+
+<form>	
+	<% reference = nil %>	
+	
+	<table class="grid no_hand">
+	<% if @reminders.size > 0 %>
+		<tbody>
+			<% @reminders.each do |reminder| %>
+			<% day_name = l(reminder.scheduled_at, :format => "%A") %>
+			<% day_name = 'Hoje' if Time.zone.now.day == reminder.scheduled_at.day && Time.zone.now.month == reminder.scheduled_at.month && Time.zone.now.day == reminder.scheduled_at.day  %>
+			
+			<% if reference != day_name %>
+			<tr>		
+				<td>					
+					<h3>
+						<%= reference = day_name %>
+					</h3>			
+				</td>							
+			</tr>			
+			<% end %>			
+			<tr>	
+				<td style="padding: 1em 0 0 1em;">					
+					<div style="display: block; border-style: solid;">
+						<a style="margin-right: 10px; float: left;">
+						<% if reminder.confirmed %>
+							<img src="/images/basic/tick_32.png" style="display: block;">
+						<% else %>
+							<% if reminder.is_due %>
+							<img src="/images/basic/stop_32.png" style="display: block;">
+							<% else %>
+							<img src="/images/basic/clock_32.png" style="display: block;">
+							<% end %>
+						<% end %>
+						</a>						
+						<div style="text-align: right; margin-top: 4px; padding-left: 12px; float: right;">
+							<% unless reminder.confirmed %>
+							<a href="<%= confirm_reminder_path(reminder.id) %>" class="button_info" style="">
+								<span>Confirmar</span>
+							</a>
+							<% end %>							
+						</div>
+						
+						<div style="height: 32px; vertical-align: middle; display: table-cell; width: 10000px;">
+							<span style="color: #333333;">
+								<% unless reminder.is_due %>
+								<%= link_to reminder.title, edit_reminder_path(reminder) %>
+								<% else %>								
+								<%= link_to reminder.title, edit_reminder_path(reminder), :style => "color: red;" %> (atrasado)					
+								<% end %>
+							</span>
+							<div style="color: #808080; font-size: 11px;">								
+								<%= l(reminder.scheduled_at, :format => :long).strip() %>								
+							</div>
+							<div style="color: #808080; font-size: 11px;">
+								<%= simple_format(reminder.description) %>
+							</div>							
+					  </div>
+					</div>			
+				</td>														
+			</tr>
+			<% end %>
+		<% else %>
+			<tr>
+				<td style="padding: 1em 0 1em 1em; width: 603px;"> 
+					<div style="display: block;">Nenhum resultado encontrado para a sua consulta.</div>
+				</td>					
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
+</form>
+
+<div class="paginate bottom">
+	<div class="left">
+		<a class="back_to_top" href="#content">
+			<div class="to_top_icon"></div>
+			<strong>voltar ao topo</strong>
+			<div class="clear"></div>
+		</a>
+	</div>
+	<div class="right">
+		<%= will_paginate(@reminders, :previous_label => "&#171; #{t('actions.previous')}", :next_label => "#{t('actions.next')} &#187;") %>
+	</div>
+	<div class="clear"></div>
+</div>

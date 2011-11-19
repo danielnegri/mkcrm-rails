@@ -1,0 +1,75 @@
+<%= javascript_include_tag 'views/overview/index' %>
+<h2>
+	Vis&atilde;o Geral
+	<em class="heading_description">Lista de eventos e aniversariantes</em>
+</h2>
+<p>
+	Gerenciar a sua carreira &eacute; muito f&aacute;cil. Veja todos seus itens organizados em um s&oacute; lugar, 
+	crie lembretes para cada tarefa que voc&ecirc; deseja realizar. Maximize seu tempo trabalhando menos. 
+</p>
+
+<!-- events -->
+<div class="editor_area">
+	<div id="events_editor_label" class="editor_label">
+		<div class="alignleft">Eventos Agendados</div>
+		<!--
+		<div class="alignright">
+			<a id="show_events_table" style="display: none">editar</a>
+			<a id="hide_events_table" style="">ocultar</a>
+		</div>	
+		-->
+	</div>		
+	
+	<div id="events_editor_desc" class="clear" style="padding-top: 10px; ">	
+		<%= render :partial => 'events' %>	
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>	
+	
+	<!--
+	<div id="events_detail_editor_desc" class="clear" style="display: none">
+		<div class="alignleft">Total de eventos agendados</div>
+		<div class="alignright"><%= @events.size %></div>
+		<div class="clear"></div>		
+	</div>
+	<div class="clear"></div>	
+	-->
+</div>
+<!-- end of events -->
+
+<div class="clear"></div>	
+<br />
+
+<!-- birthdays -->
+<div class="editor_area">
+	<div id="birthdays_editor_label" class="editor_label">
+		<div class="alignleft">Aniversariantes do Mês</div>
+		<!--
+		<div class="alignright">
+			<a id="show_birthdays_table" style="display: none">editar</a>
+			<a id="hide_birthdays_table" style="">ocultar</a>
+		</div>	
+		-->
+	</div>		
+	
+	<div id="birthdays_editor_desc" class="clear" style="padding-top: 10px;">
+		<%= render :partial => 'birthdays' %>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>	
+		
+	<!--
+	<div id="events_detail_editor_desc" class="clear" style="display: none">
+		<div class="alignleft">Total de aniversariantes</div>
+		<div class="alignright"><%= @birthdays.size %></div>
+		<div class="clear"></div>		
+	</div>
+	<div class="clear"></div>	
+	-->
+</div>
+<!-- end of birthdays -->
+
+
+<div class="clear"></div>	
+<br />
+<br />

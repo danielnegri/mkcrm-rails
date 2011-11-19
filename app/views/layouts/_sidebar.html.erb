@@ -1,0 +1,49 @@
+<div class="inline_content_widget">
+	<h3 class="widget_title"><%= current_user.profile.name %></h3>
+	
+	<!-- end widget title -->					
+	<div class="widget_info">
+		<a href="<%= profile_path(current_user.profile) %>"><%= image_tag current_user.profile.avatar.url(:profile), :alt => current_user.profile.name %></a>
+		<div class="content">
+			<%= link_to current_user.profile.position, profile_path(current_user.profile), :class => "user_type" %>
+			<%= link_to 'Editar meu perfil', edit_profile_path(current_user.profile) %>			
+		</div>
+	</div>
+	<!-- end widget info -->					
+			
+	<div class="widget_menu">
+		<div id="sidebar_wrapper">
+			<div class="navigation_wrapper">
+				<% case controller.controller_name %>
+				<% 	when 'contacts' %>
+				<%= render :partial => "contacts/sidebar"%> 
+				<% 	when 'contact_calls' %>
+				<%= render :partial => "contacts/sidebar"%>
+				<% 	when 'events' %>
+				<%= render :partial => "events/sidebar"%> 
+				<% 	when 'orders' %>
+				<%= render :partial => "orders/sidebar"%> 
+				<% 	when 'overview' %>
+				<%= render :partial => "profiles/sidebar"%>
+				<% 	when 'products' %>
+				<%= render :partial => "product_inventories/sidebar"%>
+				<% 	when 'product_inventories' %>
+				<%= render :partial => "product_inventories/sidebar"%>
+				<% 	when 'profiles' %>
+				<%= render :partial => "profiles/sidebar"%>	
+				<% 	when 'reminders' %>
+				<%= render :partial => "reminders/sidebar"%>		
+				<% end %>
+			</div>
+			<!-- end navigation wrapper -->
+		</div>							
+		<!-- end sidebar wrapper -->				
+	</div>
+	<!-- end widget menu -->
+	<br />
+	<div class="clear"></div>
+	
+	<div class="widget_bottom"></div>
+	<!-- end widget content -->
+</div>
+<!-- end widget -->					

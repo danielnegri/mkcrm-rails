@@ -1,0 +1,48 @@
+<h2>
+	Lista de Consultoras
+	<em class="heading_description">Pessoas que voc&ecirc; talvez conhe&ccedil;a</em>
+</h2>
+
+<p>
+	Selecione uma consultora clicando no seu nome para ver o seu perfil, 
+	obtenha mais informações sobre <b>Como adicionar amigas</b> acessando a <a href="#">Central de Ajuda</a>.</b>
+</p>
+
+
+<%= form_tag profiles_path, :method => "get", :id => "profiles_search" do %>	
+<div class="horizontal_list_selection">
+	<%= hidden_field_tag :list, params[:list] %>	
+	<a href="/profiles" class="select_button left_selector <%= 'current_view' unless params[:list] == 'exclusive' %>">Todas</a>		
+	<a href="/profiles?list=exclusive" class="select_button right_selector <%= 'current_view' if params[:list] == 'exclusive' %>">Minhas amigas</a>
+	
+	<div class="search">
+		<div class="search_wrapper">
+			<div class="search_icon"><img src="/images/basic/loupe.png" alt="Loupe"></div>			
+			<%= text_field_tag :search, params[:search], :class =>  "search_field thin", :autocomplete => "off" %>
+		</div>
+		<div id="loading" class="hide" style="display: none;"><img src="/images/basic/loader.png?1302297477" alt="Loader"></div>
+		<div class="clear"></div>		
+	</div>
+	<div class="clear"></div>
+	
+</div>
+<% end %>
+
+<div id="profiles">
+	<%= render :partial => 'profiles' %>
+</div>
+
+
+
+<br />
+
+<!-- TODO: Habilitar envio de convites -->
+
+<% if current_user.super_user %>
+<div id="friendship_requests">
+	<%= render :partial => 'friendship_requests' %>
+</div>
+<% end %>
+
+<br />
+<br />

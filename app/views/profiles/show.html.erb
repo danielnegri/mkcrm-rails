@@ -1,0 +1,141 @@
+<h2>
+	Perfil Mary Kay
+	<em class="heading_description">Informa&ccedil;&otilde;es da consultora</em>
+</h2>
+
+<div style="display: block; border-style: solid;">
+	<a style="margin-right: 10px; float: left;">
+		<%= image_tag @profile.avatar.url(:profile), :alt => @profile.name, 
+		:style => "display: block; background-color: #FFFFFF; border: 1px solid #B2B2B2; padding: 2px;"%>
+	</a>
+	
+	<!-- TODO: Editar perfil -->	
+	<div style="text-align: right; margin-top: 14px; padding-left: 12px; float: right;">
+		<% if @profile == current_user.profile %>		
+		<a href="<%= edit_profile_path(@profile) %>" class="button">
+			<span>Editar</span>
+		</a>			
+		<% else %>	
+		
+		<% if current_user.super_user %>			
+		<a href="<%= edit_profile_path(@profile) %>" class="button_info">
+			<!-- TODO: Editar perfil -->	
+			
+			<span><strong>+</strong> Adicionar</span>
+			
+		</a>
+		<% end %>
+		<% end %>
+	</div>
+	
+	<div style="height: 32px; vertical-align: middle; display: table-cell; width: 10000px;">
+		<h3 style="color: #333333; margin-bottom: 4px;">
+			<%= @profile.name %>
+		</h3>
+		<span style="color: #333333;" >
+			<%= @profile.position %>&nbsp;
+		</span>			
+		<div style="color: #333333; margin-top: 14px;">
+			<% if @profile.date_of_birth %>
+			<strong>Aniversário: <%= l(@profile.date_of_birth, :format => '%A, %d de %B') %></strong>&nbsp;
+			<% else %>
+			<strong>Aniversário: N&atilde;o informou</strong>&nbsp;
+			<% end %>
+		</div>
+		<div style="color: #808080;">								
+			<%= "#{@profile.telephone} #{( @profile.telephone != '' && @profile.mobile_phone != '' ? '  |  ' : '' )} #{@profile.mobile_phone}" %>&nbsp;								
+		</div>					
+		<div style="color: #808080; font-size: 11px;">
+			<%= @profile.location %>&nbsp;
+		</div>	
+		<div style="color: #808080; font-size: 11px;">
+			<%= @profile.area %> (&Aacute;rea Nacional)&nbsp;
+		</div>
+  </div>
+</div>
+<div class="clear"></div>
+<br />
+
+<% if current_user.super_user %>
+<div class="editor_area">
+	<div id="profile_editor_label" class="editor_label">
+		<div class="alignleft">Diretora</div>	
+	</div>	
+	<div class="clear"></div>		
+</div>
+
+<div style="display: block; border-style: solid;">
+	<a href="#" style="margin-right: 10px; float: left;">
+		<%= image_tag @profile.avatar.url(:thumb), :alt => @profile.name, 
+		:style => "display: block; background-color: #FFFFFF; border: 1px solid #B2B2B2; padding: 2px;",
+		:width => 64, :height => 64,
+		:styles => "max-height:64px; max-width:64px;" %>
+	</a>
+	<div style="text-align: right; margin-top: 14px; padding-left: 12px; float: right;">		
+		<a href="<%= edit_profile_path(@profile) %>" class="button_info">
+			<span><strong>+</strong> Adicionar Diretora</span>
+		</a>			
+	</div>
+	<div style="height: 32px; vertical-align: middle; display: table-cell; width: 10000px;">
+		<h3 style="color: #333333; margin-bottom: 4px;">
+			<a href="#"><%= @profile.name %></a>
+		</h3>
+		<span style="color: #333333;" >
+			<%= @profile.position %>&nbsp;
+		</span>				
+	</div>
+</div>
+<div class="clear"></div>
+<br />
+
+
+<div class="editor_area">
+	<div class="editor_label">
+		<div class="alignleft">Filhas diretas</div>	
+	</div>	
+	<div class="clear"></div>		
+</div>
+<div id="profile_list">
+<% if current_user.contacts.size > 0 %>
+	
+	<ul class="list_horizontal clear">
+		<% current_user.contacts.each do |user| %>
+		<li class="alignleft">
+			<div class="portrait">
+				<a href="#">
+					<%= image_tag user.avatar.url(:thumb), :alt => user.name %>
+					<span><%= user.name %></span>
+				</a>	
+			</div>
+		</li>		
+		<% end %>
+	</ul>
+	
+<% else %>
+	<div class="alignleft" style="color: #808080;">Nenhuma filha cadastrada.</div>
+<% end %>	
+	<div class="alignright" style="margin-top: 20px;"><a id="add-contact-call" href="#" class="button_info"><span><strong>+</strong> Adicionar Filha</span></a></div>
+	<div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+<br />
+
+<% end %>
+
+<div class="editor_area">
+	<div id="profile_editor_label" class="editor_label">
+		<div class="alignleft">Anota&ccedil;&otilde;es</div>	
+	</div>	
+	
+	<div id="profile_editor_desc" class="clear" style="">								
+		<% if not @profile.biography.blank? %>			
+		<div class="alignleft" style="color: #808080; font-size: 12px;"><%= simple_format(@profile.biography, :style => "margin-bottom: 0px; text-align: justify;") %></div>
+		<% end %>
+	</div>
+
+	<div class="clear"></div>		
+</div>
+
+<div class="clear"></div>
+<br />

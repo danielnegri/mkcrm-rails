@@ -1,3 +1,0 @@
-class FriendshipRequestsController < ApplicationController
-  
-end

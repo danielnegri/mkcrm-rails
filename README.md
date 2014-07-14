@@ -26,7 +26,7 @@ Hop to [our wiki](http://wiki.github.com/danielnegri/mkcrm-rails/ "mkCRM wiki") 
 installing mkCRM.
 
 [mkcrm]: http://mkcrm.com.br
-[preview]: http://mkcrm.com.br/images/crm_screenshot.png
+[preview]: http://4.bp.blogspot.com/-VbHoR-KJds4/Ty_dbXgsk6I/AAAAAAAAAFw/NymzQeRB-tE/s640/contatos.png
 [license]: http://www.gnu.org/licenses/agpl-3.0.html
 [pixelmixer]: http://pixel-mixer.com/
 
